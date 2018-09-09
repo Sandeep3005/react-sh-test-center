@@ -51,7 +51,10 @@ class Quiz extends Component {
     this.listOfClass.push('animated');
     if (nextProps.question) {
       let { difficultyLevel } = nextProps.question;
-      this.setState({ percent: 100 },()=> {
+      this.setState({ 
+        percent: 100,
+        disableSubmitButton: false
+       },()=> {
         this.setupCountdownTimer(difficultyLevel);
       });
      
@@ -172,8 +175,7 @@ class Quiz extends Component {
   }
 
   render() { 
-    let { classes, question: questionInfo} = this.props;  
-    console.log(this.listOfClass.toString().split(',').join(' '));
+    let { classes, question: questionInfo} = this.props;
     return (
       <div>
         <div className="container">

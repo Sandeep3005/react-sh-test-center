@@ -38,7 +38,6 @@ class QuizContainer extends Component {
 
   componentWillUpdate(nextProps, nextState) {
     let { questionCounter, totalQuestions, userScore } = nextState; 
-    console.log('userScore', userScore)
     if (totalQuestions === questionCounter) {
       nextProps.history.push({pathname: "/result", state: userScore });
     }
@@ -58,10 +57,14 @@ class QuizContainer extends Component {
     let { questions, questionCounter, userScore } = this.state;
     let { score } = userScore;
     let question = questions[questionCounter];
+    console.log('question', question)
     let answerPicked = this.getCorrectAnswerNumerical(selectedValue);
     if (question.correctOption === answerPicked) {
       userScore.score = ++score;
-      userScore.currectAnswerForQuestion.push(++questionCounter);
+      userScore.currectAnswerForQuestion.push({
+        questionNumber: ++questionCounter,
+        difficultyLevel: question.difficultyLevel
+      });
     } else {
       userScore.wrongAnswerForQuestion.push(++questionCounter);
     }
